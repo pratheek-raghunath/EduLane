@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 //create card
 class CreateCard extends StatelessWidget {
-  const CreateCard({Key? key}) : super(key: key);
+  final String text;
+
+  const CreateCard({required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class CreateCard extends StatelessWidget {
               // ),
               color: Color.fromARGB(255, 200, 230, 255),
             ),
-            child: const SizedBox(
+            child: SizedBox(
               width: 400,
               height: 200,
               child: Align(
@@ -43,7 +45,7 @@ class CreateCard extends StatelessWidget {
                 child: Padding(
                     padding: EdgeInsets.fromLTRB(15, 0, 0, 1),
                     child: Text(
-                      'My class',
+                      text,
                       style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
