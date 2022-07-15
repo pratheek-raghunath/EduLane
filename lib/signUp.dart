@@ -31,23 +31,6 @@ class _SignupState extends State<Signup> {
           textColor: Colors.white,
           fontSize: 16.0);
     } else {
-      // try {
-      //   await FirebaseAuth.instance
-      //       .signInWithEmailAndPassword(
-      //           email: emailController.text, password: passwordController.text)
-      //       .then((uid) => {
-      //             Navigator.push(context, MaterialPageRoute(builder: (context) {
-      //               return const Scaffold(body: Sample());
-      //             }))
-      //           });
-      // } on FirebaseAuthException catch (e) {
-      //   if (e.code == 'user-not-found') {
-      //     print('No user found for that email.');
-      //   } else if (e.code == 'wrong-password') {
-      //     print('Wrong password provided for that user.');
-      //   }
-      // }
-
       try {
         await FirebaseAuth.instance
             .createUserWithEmailAndPassword(
