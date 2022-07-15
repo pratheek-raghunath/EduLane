@@ -109,7 +109,7 @@ class _CreateClassFormState extends State<CreateClassForm> {
               },
               child: const Text(
                 'Create',
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 19),
               ),
             ),
           ),

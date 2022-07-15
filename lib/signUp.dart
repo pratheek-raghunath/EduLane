@@ -1,16 +1,15 @@
-import 'package:edulane/signUp.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:edulane/teacher.dart';
 
-class LoginForm extends StatefulWidget {
-  const LoginForm({Key? key}) : super(key: key);
-  static const appTitle = 'Edulane';
+class Signup extends StatefulWidget {
+  const Signup({Key? key}) : super(key: key);
+
   @override
-  State<LoginForm> createState() => _LoginFormState();
+  State<Signup> createState() => _SignupState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class _SignupState extends State<Signup> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -35,7 +34,10 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    // TODO: implement build
+    // throw UnimplementedError();
+    return Material(
+      child: Padding(
         padding: const EdgeInsets.all(10),
         child: ListView(
           children: <Widget>[
@@ -53,9 +55,19 @@ class _LoginFormState extends State<LoginForm> {
                 alignment: Alignment.center,
                 padding: const EdgeInsets.all(10),
                 child: const Text(
-                  'Login',
+                  'Sign Up',
                   style: TextStyle(fontSize: 20),
                 )),
+            Container(
+              padding: const EdgeInsets.all(10),
+              child: TextField(
+                controller: emailController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Name',
+                ),
+              ),
+            ),
             Container(
               padding: const EdgeInsets.all(10),
               child: TextField(
@@ -67,7 +79,7 @@ class _LoginFormState extends State<LoginForm> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+              padding: const EdgeInsets.all(10),
               child: TextField(
                 obscureText: true,
                 controller: passwordController,
@@ -78,36 +90,34 @@ class _LoginFormState extends State<LoginForm> {
               ),
             ),
             Container(
-                // height: 50,
-                padding: const EdgeInsets.fromLTRB(130, 30, 130, 10),
+              padding: const EdgeInsets.all(10),
+              child: TextField(
+                obscureText: true,
+                controller: passwordController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Confirm Password',
+                ),
+              ),
+            ),
+            Container(
+                height: 90,
+                padding: const EdgeInsets.fromLTRB(100, 30, 100, 10),
                 child: ElevatedButton(
+                  style: ButtonStyle(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0),
+                              side: BorderSide(color: Colors.blue)))),
                   child: const Text(
-                    'Login',
+                    'SignUp',
                     style: TextStyle(fontSize: 20),
                   ),
                   onPressed: login,
                 )),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text("Don't have an account?"),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Signup()));
-                  },
-                  child: Text(
-                    " Sign up",
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-              ],
-            ),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }
