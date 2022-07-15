@@ -91,10 +91,19 @@ class _CreateClassFormState extends State<CreateClassForm> {
           // height: 40,
           // width: 100,
           // padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
-          child: Center(
+          child: Container(
+            height: 90,
+            width: 500,
+            padding: const EdgeInsets.fromLTRB(100, 30, 100, 10),
             child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: const Color.fromARGB(255, 0, 174, 255),
+              style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.blue)))),
+              child: const Text(
+                'Create',
+                style: TextStyle(fontSize: 22),
               ),
               onPressed: () {
                 createClass(
@@ -104,13 +113,9 @@ class _CreateClassFormState extends State<CreateClassForm> {
                     subject: subjectController.text);
 
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const Scaffold(body: Sample());
+                  return const Scaffold(body: Dashboard());
                 }));
               },
-              child: const Text(
-                'Create',
-                style: TextStyle(fontSize: 19),
-              ),
             ),
           ),
         ),
