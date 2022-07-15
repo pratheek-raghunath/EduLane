@@ -35,81 +35,89 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.all(10),
-        child: ListView(
-          children: <Widget>[
-            Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(10),
-                child: const Text(
-                  'EduLane',
-                  style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 30),
-                )),
-            Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(10),
-                child: const Text(
-                  'Login',
-                  style: TextStyle(fontSize: 20),
-                )),
-            Container(
-              padding: const EdgeInsets.all(10),
-              child: TextField(
-                controller: emailController,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.email),
-                  border: OutlineInputBorder(),
-                  labelText: 'Email',
-                ),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-              child: TextField(
-                obscureText: true,
-                controller: passwordController,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.lock),
-                  border: OutlineInputBorder(),
-                  labelText: 'Password',
-                ),
-              ),
-            ),
-            Container(
-                // height: 50,
-                padding: const EdgeInsets.fromLTRB(130, 30, 130, 10),
-                child: ElevatedButton(
+    return Material(
+      child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: ListView(
+            children: <Widget>[
+              Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.all(10),
+                  child: const Text(
+                    'EduLane',
+                    style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 30),
+                  )),
+              Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.all(10),
                   child: const Text(
                     'Login',
                     style: TextStyle(fontSize: 20),
-                  ),
-                  onPressed: login,
-                )),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text("Don't have an account?"),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Signup()));
-                  },
-                  child: Text(
-                    " Sign up",
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18,
-                    ),
+                  )),
+              Container(
+                padding: const EdgeInsets.all(10),
+                child: TextField(
+                  controller: emailController,
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.email),
+                    border: OutlineInputBorder(),
+                    labelText: 'Email',
                   ),
                 ),
-              ],
-            ),
-          ],
-        ));
+              ),
+              Container(
+                padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                child: TextField(
+                  obscureText: true,
+                  controller: passwordController,
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.lock),
+                    border: OutlineInputBorder(),
+                    labelText: 'Password',
+                  ),
+                ),
+              ),
+              Container(
+                  height: 90,
+                  padding: const EdgeInsets.fromLTRB(80, 30, 80, 10),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18.0),
+                                    side: BorderSide(color: Colors.blue)))),
+                    child: const Text(
+                      'Login',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    onPressed: login,
+                  )),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text("Don't have an account?"),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Signup()));
+                    },
+                    child: Text(
+                      " Sign up",
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          )),
+    );
   }
 }

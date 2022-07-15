@@ -1,3 +1,4 @@
+import 'package:edulane/login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:edulane/teacher.dart';
@@ -93,7 +94,7 @@ class _SignupState extends State<Signup> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
               child: TextField(
                 obscureText: true,
                 controller: passwordController,
@@ -103,6 +104,26 @@ class _SignupState extends State<Signup> {
                   labelText: 'Confirm Password',
                 ),
               ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text("Already have an account?"),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LoginForm()));
+                  },
+                  child: Text(
+                    "Login",
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+              ],
             ),
             Container(
                 height: 90,
