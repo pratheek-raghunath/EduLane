@@ -10,26 +10,6 @@ class CreateClassForm extends StatefulWidget {
   State<CreateClassForm> createState() => _CreateClassFormState();
 }
 
-// class CreateClass extends StatelessWidget {
-//   const CreateClass({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     const appTitle = 'Create Class';
-
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       title: appTitle,
-//       home: Scaffold(
-//         appBar: AppBar(
-//           title: const Text(appTitle),
-//         ),
-//         body: const ClassField(),
-//       ),
-//     );
-//   }
-// }
-
 class _CreateClassFormState extends State<CreateClassForm> {
   TextEditingController nameController = TextEditingController();
   TextEditingController sectionController = TextEditingController();

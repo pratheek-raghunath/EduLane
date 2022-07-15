@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:edulane/createClass.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'createCard.dart';
 
@@ -43,6 +44,8 @@ class Class {
 
   static Stream<List<Class>> readClasses() => FirebaseFirestore.instance
       .collection('classes')
+      .where("teacher_id",
+          isEqualTo: FirebaseAuth.instance.currentUser?.uid ?? '')
       .snapshots()
       .map((snapshot) =>
           snapshot.docs.map((doc) => Class.fromJSON(doc.data())).toList());
