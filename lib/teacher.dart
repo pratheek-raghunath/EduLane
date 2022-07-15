@@ -52,8 +52,8 @@ class Class {
           snapshot.docs.map((doc) => Class.fromJSON(doc.data())).toList());
 }
 
-class Sample extends StatelessWidget {
-  const Sample({super.key});
+class Dashboard extends StatelessWidget {
+  const Dashboard({super.key});
 
   static const appTitle = 'Edulane';
 
@@ -131,7 +131,10 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.dashboard_rounded),
             title: const Text('Dashboard'),
-            onTap: () => {},
+            onTap: () => {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Dashboard()))
+            },
           ),
           ListTile(
             leading: const Icon(Icons.calendar_month_rounded),

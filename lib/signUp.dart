@@ -23,7 +23,7 @@ class _SignupState extends State<Signup> {
               email: emailController.text, password: passwordController.text)
           .then((uid) => {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const Scaffold(body: Sample());
+                  return const Scaffold(body: Dashboard());
                 }))
               });
     } on FirebaseAuthException catch (e) {
