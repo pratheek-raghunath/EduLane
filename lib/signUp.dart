@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:edulane/login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:edulane/teacher.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Signup extends StatefulWidget {
   const Signup({Key? key}) : super(key: key);
@@ -11,26 +13,94 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
-  TextEditingController name = TextEditingController();
+  TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
 
+  void createUser(final String uid, String name) {}
+
   void login() async {
-    try {
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-              email: emailController.text, password: passwordController.text)
-          .then((uid) => {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const Scaffold(body: Sample());
-                }))
-              });
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+    if (passwordController.text != confirmPasswordController.text) {
+      Fluttertoast.showToast(
+          msg: "Password & Confirm Password Don't Match",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.blue,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    } else {
+      // try {
+      //   await FirebaseAuth.instance
+      //       .signInWithEmailAndPassword(
+      //           email: emailController.text, password: passwordController.text)
+      //       .then((uid) => {
+      //             Navigator.push(context, MaterialPageRoute(builder: (context) {
+      //               return const Scaffold(body: Sample());
+      //             }))
+      //           });
+      // } on FirebaseAuthException catch (e) {
+      //   if (e.code == 'user-not-found') {
+      //     print('No user found for that email.');
+      //   } else if (e.code == 'wrong-password') {
+      //     print('Wrong password provided for that user.');
+      //   }
+      // }
+
+      try {
+        await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+        )
+            .then((uid) async {
+          final docClass =
+              FirebaseFirestore.instance.collection('users').doc(uid.user?.uid);
+
+          final user = {
+            "id": uid.user?.uid,
+            "name": nameController.text,
+            "type": "teacher"
+          };
+
+          await docClass.set(user);
+
+          Fluttertoast.showToast(
+              msg: "Teacher Registration Successful",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.blue,
+              textColor: Colors.white,
+              fontSize: 16.0);
+
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return const Scaffold(body: LoginForm());
+          }));
+        });
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          Fluttertoast.showToast(
+              msg: "Password is weak",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.blue,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        } else if (e.code == 'email-already-in-use') {
+          Fluttertoast.showToast(
+              msg: "Account already exists",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.blue,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+      } catch (e) {
+        print(e);
       }
     }
   }
@@ -62,7 +132,7 @@ class _SignupState extends State<Signup> {
             Container(
               padding: const EdgeInsets.all(10),
               child: TextField(
-                controller: emailController,
+                controller: nameController,
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.account_circle),
                   border: OutlineInputBorder(),
@@ -97,7 +167,7 @@ class _SignupState extends State<Signup> {
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
               child: TextField(
                 obscureText: true,
-                controller: passwordController,
+                controller: confirmPasswordController,
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.lock),
                   border: OutlineInputBorder(),
