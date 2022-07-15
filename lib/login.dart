@@ -61,6 +61,7 @@ class _LoginFormState extends State<LoginForm> {
               child: TextField(
                 controller: emailController,
                 decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.email),
                   border: OutlineInputBorder(),
                   labelText: 'Email',
                 ),
@@ -72,6 +73,7 @@ class _LoginFormState extends State<LoginForm> {
                 obscureText: true,
                 controller: passwordController,
                 decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.lock),
                   border: OutlineInputBorder(),
                   labelText: 'Password',
                 ),

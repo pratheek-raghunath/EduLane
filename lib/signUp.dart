@@ -10,8 +10,10 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  TextEditingController name = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
 
   void login() async {
     try {
@@ -34,8 +36,6 @@ class _SignupState extends State<Signup> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    // throw UnimplementedError();
     return Material(
       child: Padding(
         padding: const EdgeInsets.all(10),
@@ -63,6 +63,7 @@ class _SignupState extends State<Signup> {
               child: TextField(
                 controller: emailController,
                 decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.account_circle),
                   border: OutlineInputBorder(),
                   labelText: 'Name',
                 ),
@@ -73,6 +74,7 @@ class _SignupState extends State<Signup> {
               child: TextField(
                 controller: emailController,
                 decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.email),
                   border: OutlineInputBorder(),
                   labelText: 'Email',
                 ),
@@ -84,6 +86,7 @@ class _SignupState extends State<Signup> {
                 obscureText: true,
                 controller: passwordController,
                 decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.lock),
                   border: OutlineInputBorder(),
                   labelText: 'Password',
                 ),
@@ -95,6 +98,7 @@ class _SignupState extends State<Signup> {
                 obscureText: true,
                 controller: passwordController,
                 decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.lock),
                   border: OutlineInputBorder(),
                   labelText: 'Confirm Password',
                 ),
