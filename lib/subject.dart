@@ -77,7 +77,10 @@ class Subject extends StatelessWidget {
                           child: Column(
                             children: [
                               ListTile(
-                                leading: Icon(Icons.arrow_drop_down_circle),
+                                leading: Icon(
+                                  Icons.account_circle,
+                                  size: 50,
+                                ),
                                 title: const Text('Faculty Name'),
                                 subtitle: Text(
                                   'Subject Name',

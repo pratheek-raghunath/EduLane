@@ -43,42 +43,45 @@ class TeacherCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Card(
-        clipBehavior: Clip.antiAlias,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18),
-        ), // Rounded RectangleBorder
-        child: InkWell(
-          splashColor: Colors.blue.withAlpha(30),
-          onTap: () {
-            debugPrint('Card tapped.');
-            // const NavDrawer();
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return const Scaffold(body: LoginForm());
-            }));
-          },
-          child: Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/images/teaching.jpg"),
-                fit: BoxFit.fitWidth,
-                alignment: Alignment.topCenter,
+      child: Container(
+        margin: const EdgeInsets.all(10),
+        child: Card(
+          clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+          ), // Rounded RectangleBorder
+          child: InkWell(
+            splashColor: Colors.blue.withAlpha(30),
+            onTap: () {
+              debugPrint('Card tapped.');
+              // const NavDrawer();
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const Scaffold(body: LoginForm());
+              }));
+            },
+            child: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/teaching.jpg"),
+                  fit: BoxFit.fitWidth,
+                  alignment: Alignment.topCenter,
+                ),
               ),
-            ),
-            child: const SizedBox(
-              width: 300,
-              height: 200,
-              child: Align(
-                alignment: Alignment.bottomLeft,
-                child: Padding(
-                    padding: EdgeInsets.fromLTRB(15, 0, 0, 1),
-                    child: Text(
-                      'Teacher Login',
-                      style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    )),
+              child: const SizedBox(
+                width: 300,
+                height: 200,
+                child: Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Padding(
+                      padding: EdgeInsets.fromLTRB(15, 0, 0, 1),
+                      child: Text(
+                        'Teacher Login',
+                        style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      )),
+                ),
               ),
             ),
           ),
