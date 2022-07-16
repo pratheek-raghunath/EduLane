@@ -1,18 +1,18 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:edulane/signUp.dart';
+import 'package:edulane/studentSignUp.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:edulane/teacher.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'student.dart';
 
-class LoginForm extends StatefulWidget {
-  const LoginForm({Key? key}) : super(key: key);
+class StudentLoginForm extends StatefulWidget {
+  const StudentLoginForm({Key? key}) : super(key: key);
   static const appTitle = 'Edulane';
   @override
-  State<LoginForm> createState() => _LoginFormState();
+  State<StudentLoginForm> createState() => _StudentLoginFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class _StudentLoginFormState extends State<StudentLoginForm> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -28,9 +28,9 @@ class _LoginFormState extends State<LoginForm> {
             .get();
 
         final user = ds.data() as Map<String, dynamic>;
-        if (user['type'] == 'student') {
+        if (user['type'] == 'teacher') {
           Fluttertoast.showToast(
-              msg: "Login as Student",
+              msg: "Login as Teacher",
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 1,
@@ -39,14 +39,14 @@ class _LoginFormState extends State<LoginForm> {
               fontSize: 16.0);
         } else {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const Scaffold(body: Dashboard());
+            return const Scaffold(body: StudentDashboard());
           }));
         }
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         Fluttertoast.showToast(
-            msg: "Teacher doesn't exist",
+            msg: "Student doesn't exist",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
@@ -135,8 +135,10 @@ class _LoginFormState extends State<LoginForm> {
                   Text("Don't have an account?"),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Signup()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => StudentSignup()));
                     },
                     child: Text(
                       " Sign up",

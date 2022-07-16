@@ -46,6 +46,7 @@ dependencies:
   flutter_launcher_icons: ^0.9.3
   rename: ^2.0.1
   convex_bottom_bar: ^3.0.0
+  random_string: ^2.3.1
 
 dev_dependencies:
   flutter_test:

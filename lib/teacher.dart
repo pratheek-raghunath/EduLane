@@ -13,6 +13,8 @@ class Class {
   final String section;
   final String room;
   final String subject;
+  final String class_code;
+  final List<dynamic> students;
 
   Class(
       {this.id = '',
@@ -20,7 +22,9 @@ class Class {
       required this.name,
       required this.section,
       required this.room,
-      required this.subject});
+      required this.subject,
+      required this.class_code,
+      required this.students});
 
   static Class fromJSON(Map<String, dynamic> json) => Class(
       id: json['id'],
@@ -28,7 +32,9 @@ class Class {
       name: json['name'],
       section: json['section'],
       room: json['room'],
-      subject: json['subject']);
+      subject: json['subject'],
+      class_code: json['class_code'],
+      students: json['students']);
 
   Map<String, dynamic> toJSON() => {
         'id': id,
@@ -36,7 +42,9 @@ class Class {
         'name': name,
         'section': section,
         'room': room,
-        'subject': subject
+        'subject': subject,
+        'class_code': class_code,
+        'students': students
       };
 
   static Widget buildClass(Class c) => CreateCard(text: c.subject);

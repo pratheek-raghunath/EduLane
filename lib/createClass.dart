@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:edulane/teacher.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:random_string/random_string.dart';
 
 class CreateClassForm extends StatefulWidget {
   const CreateClassForm({Key? key}) : super(key: key);
@@ -16,6 +17,24 @@ class _CreateClassFormState extends State<CreateClassForm> {
   TextEditingController roomController = TextEditingController();
   TextEditingController subjectController = TextEditingController();
 
+  Future<String> generateClassCode() async {
+    String classCode = randomAlphaNumeric(5);
+
+    while (true) {
+      QuerySnapshot qs = await FirebaseFirestore.instance
+          .collection('classes')
+          .where('class_code', isEqualTo: classCode)
+          .get();
+
+      if (qs.size > 0)
+        classCode = randomAlphaNumeric(5);
+      else
+        break;
+    }
+
+    return classCode;
+  }
+
   Future createClass(
       {required String name,
       required String section,
@@ -29,7 +48,9 @@ class _CreateClassFormState extends State<CreateClassForm> {
         name: name,
         section: section,
         room: room,
-        subject: subject);
+        subject: subject,
+        class_code: await generateClassCode(),
+        students: []);
 
     final json = c.toJSON();
 
