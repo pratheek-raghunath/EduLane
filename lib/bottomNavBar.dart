@@ -23,7 +23,7 @@ class _BottomNavBarState extends State<Home> {
         body: _pageOptions[selectedIndex],
         bottomNavigationBar: ConvexAppBar(
             items: [
-              TabItem(icon: Icons.dashboard_rounded, title: 'Dashboard'),
+              TabItem(icon: Icons.library_books, title: 'Subject'),
               TabItem(icon: Icons.people_alt_rounded, title: 'People'),
               TabItem(icon: Icons.account_circle_rounded, title: 'Profile'),
             ],

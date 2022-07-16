@@ -7,7 +7,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'teacher.dart';
-import 'createCard.dart';
 
 class StudentDashboard extends StatelessWidget {
   const StudentDashboard({super.key});
