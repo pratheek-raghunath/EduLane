@@ -12,7 +12,7 @@ class CreateCard extends StatelessWidget {
     return Align(
       alignment: Alignment.topCenter,
       child: Card(
-        margin: const EdgeInsets.all(10),
+        margin: const EdgeInsets.fromLTRB(8, 10, 8, 8),
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18),
@@ -39,7 +39,7 @@ class CreateCard extends StatelessWidget {
             ),
             child: SizedBox(
               width: 400,
-              height: 200,
+              height: 130,
               child: Align(
                 alignment: Alignment.center,
                 child: Padding(

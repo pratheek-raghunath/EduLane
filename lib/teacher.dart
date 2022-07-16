@@ -63,48 +63,72 @@ class Dashboard extends StatelessWidget {
 
   static const appTitle = 'Edulane';
 
+  Future<bool?> showWarning(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text('Do you want to logout?'),
+              actions: [
+                ElevatedButton(
+                  child: Text('No'),
+                  onPressed: () => Navigator.pop(context, false),
+                ),
+                ElevatedButton(
+                  child: Text('Yes'),
+                  onPressed: () => Navigator.pop(context, true),
+                ),
+              ],
+            ));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: const NavDrawer(),
-      appBar: AppBar(
-        title: const Text('EduLane'),
-      ),
-      body: StreamBuilder<List<Class>>(
-          stream: Class.readClasses(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return Text('Something went wrong! $snapshot.error');
-            } else if (snapshot.hasData) {
-              final classes = snapshot.data!;
+    return WillPopScope(
+      onWillPop: () async {
+        final shouldPop = await showWarning(context);
+        return shouldPop ?? false;
+      },
+      child: Scaffold(
+        drawer: const NavDrawer(),
+        appBar: AppBar(
+          title: const Text('EduLane'),
+        ),
+        body: StreamBuilder<List<Class>>(
+            stream: Class.readClasses(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Text('Something went wrong! $snapshot.error');
+              } else if (snapshot.hasData) {
+                final classes = snapshot.data!;
 
-              return ListView(
-                children: classes.map(Class.buildClass).toList(),
-              );
-            } else {
-              return Center(child: CircularProgressIndicator());
-            }
-          }),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.blue,
-        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: 'Create Class',
-              home: Scaffold(
-                appBar: AppBar(
-                  title: const Text('Create Class'),
+                return ListView(
+                  children: classes.map(Class.buildClass).toList(),
+                );
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
+            }),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.blue,
+          foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: 'Create Class',
+                home: Scaffold(
+                  appBar: AppBar(
+                    title: const Text('Create Class'),
+                  ),
+                  body: const CreateClassForm(),
                 ),
-                body: const CreateClassForm(),
-              ),
-            );
-          }));
-        },
-        child: const Icon(Icons.add),
+              );
+            }));
+          },
+          child: const Icon(Icons.add),
+        ),
+        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

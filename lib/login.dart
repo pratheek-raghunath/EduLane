@@ -50,8 +50,8 @@ class _LoginFormState extends State<LoginForm> {
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
-            backgroundColor: Colors.blue,
-            textColor: Colors.white,
+            backgroundColor: Colors.white,
+            textColor: Colors.black,
             fontSize: 16.0);
       } else if (e.code == 'wrong-password') {
         Fluttertoast.showToast(
@@ -59,10 +59,14 @@ class _LoginFormState extends State<LoginForm> {
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
-            backgroundColor: Colors.blue,
-            textColor: Colors.white,
+            backgroundColor: Colors.white,
+            textColor: Colors.black,
             fontSize: 16.0);
+        passwordController.clear();
       }
+    } finally {
+      emailController.clear();
+      passwordController.clear();
     }
   }
 

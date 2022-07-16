@@ -1,5 +1,7 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:edulane/navbar.dart';
+import 'package:open_file/open_file.dart';
 
 class Subject extends StatelessWidget {
   const Subject({super.key});
@@ -103,8 +105,13 @@ class Subject extends StatelessWidget {
                                     const EdgeInsets.fromLTRB(25, 0, 0, 0),
                                 children: [
                                   ElevatedButton.icon(
-                                    onPressed: () {
+                                    onPressed: () async {
                                       // Perform some action
+                                      final result =
+                                          await FilePicker.platform.pickFiles();
+                                      if (result == null) return;
+                                      final file = result.files.first;
+                                      openFile(file);
                                     },
                                     icon: Icon(Icons.attachment),
                                     // child: const Text('ADD'),
@@ -169,5 +176,9 @@ class Subject extends StatelessWidget {
             ),
           ),
         ));
+  }
+
+  void openFile(PlatformFile file) {
+    OpenFile.open(file.path);
   }
 }
