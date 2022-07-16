@@ -1,9 +1,9 @@
 import 'package:edulane/studentSignUp.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:edulane/teacher.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'student.dart';
 
 class StudentLoginForm extends StatefulWidget {
   const StudentLoginForm({Key? key}) : super(key: key);
@@ -39,7 +39,7 @@ class _StudentLoginFormState extends State<StudentLoginForm> {
               fontSize: 16.0);
         } else {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const Scaffold(body: Dashboard());
+            return const Scaffold(body: StudentDashboard());
           }));
         }
       });

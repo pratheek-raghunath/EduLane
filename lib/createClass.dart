@@ -49,7 +49,8 @@ class _CreateClassFormState extends State<CreateClassForm> {
         section: section,
         room: room,
         subject: subject,
-        class_code: await generateClassCode());
+        class_code: await generateClassCode(),
+        students: []);
 
     final json = c.toJSON();
 
