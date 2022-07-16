@@ -1,3 +1,4 @@
+import 'package:edulane/bottomNavBar.dart';
 import 'package:edulane/createClass.dart';
 import 'package:edulane/main.dart';
 import 'package:edulane/subject.dart';
@@ -81,7 +82,7 @@ class NavDrawer extends StatelessWidget {
             title: const Text('Notifications'),
             onTap: () => {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Subject()))
+                  context, MaterialPageRoute(builder: (context) => Home()))
             },
           ),
           ListTile(
