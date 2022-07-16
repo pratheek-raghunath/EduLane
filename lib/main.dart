@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:edulane/login.dart';
+import 'package:edulane/studentLogin.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 Future main() async {
@@ -101,6 +103,9 @@ class StudentCard extends StatelessWidget {
           splashColor: Colors.blue.withAlpha(30),
           onTap: () {
             debugPrint('Card tapped.');
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return const Scaffold(body: StudentLoginForm());
+            }));
           },
           child: Container(
             decoration: const BoxDecoration(
