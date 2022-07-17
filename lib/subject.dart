@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:edulane/student.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:edulane/navbar.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:open_file/open_file.dart';
 import 'teacher.dart';
 
@@ -208,8 +212,28 @@ class _SubjectState extends State<Subject> {
                                     final result =
                                         await FilePicker.platform.pickFiles();
                                     if (result == null) return;
-                                    final file = result.files.first;
-                                    openFile(file);
+
+                                    final String fileName =
+                                        result.files.first.name;
+                                    final file =
+                                        File(result.files.first.path ?? '');
+
+                                    try {
+                                      await FirebaseStorage.instance
+                                          .ref()
+                                          .child(c.id + '/' + fileName)
+                                          .putFile(file)
+                                          .then((res) => Fluttertoast.showToast(
+                                              msg: "File Uploaded Successfully",
+                                              toastLength: Toast.LENGTH_SHORT,
+                                              gravity: ToastGravity.BOTTOM,
+                                              timeInSecForIosWeb: 1,
+                                              backgroundColor: Colors.blue,
+                                              textColor: Colors.white,
+                                              fontSize: 16.0));
+                                    } on FirebaseException catch (e) {
+                                      print(e);
+                                    }
                                   },
                                   icon: Icon(Icons.attachment),
                                   // child: const Text('ADD'),
