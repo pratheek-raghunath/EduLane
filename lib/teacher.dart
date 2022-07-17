@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:edulane/createClass.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-import 'createCard.dart';
+import 'bottomNavBar.dart';
 
 class Class {
   String id;
@@ -47,7 +46,44 @@ class Class {
         'students': students
       };
 
-  static Widget buildClass(Class c) => CreateCard(text: c.subject);
+  static Widget buildClass(Class c, BuildContext context) => Align(
+        alignment: Alignment.topCenter,
+        child: Card(
+          margin: const EdgeInsets.fromLTRB(8, 10, 8, 8),
+          clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+          ), // Rounded RectangleBorder
+          child: InkWell(
+            splashColor: Colors.blue.withAlpha(30),
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Home(c: c)));
+            },
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(255, 200, 230, 255),
+              ),
+              child: SizedBox(
+                width: 400,
+                height: 130,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Padding(
+                      padding: EdgeInsets.fromLTRB(15, 0, 0, 1),
+                      child: Text(
+                        c.subject,
+                        style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 8, 115, 255)),
+                      )),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
 
   static Stream<List<Class>> readClasses() => FirebaseFirestore.instance
       .collection('classes')
@@ -102,7 +138,9 @@ class Dashboard extends StatelessWidget {
                 final classes = snapshot.data!;
 
                 return ListView(
-                  children: classes.map(Class.buildClass).toList(),
+                  children: classes
+                      .map((Class c) => Class.buildClass(c, context))
+                      .toList(),
                 );
               } else {
                 return Center(child: CircularProgressIndicator());

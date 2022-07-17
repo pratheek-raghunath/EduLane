@@ -37,7 +37,9 @@ class StudentDashboard extends StatelessWidget {
               final classes = snapshot.data!;
 
               return ListView(
-                children: classes.map(Class.buildClass).toList(),
+                children: classes
+                    .map((Class c) => Class.buildClass(c, context))
+                    .toList(),
               );
             } else {
               return Center(child: CircularProgressIndicator());

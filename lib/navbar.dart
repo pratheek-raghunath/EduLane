@@ -81,8 +81,9 @@ class NavDrawer extends StatelessWidget {
             leading: const Icon(Icons.notifications_rounded),
             title: const Text('Notifications'),
             onTap: () => {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Home()))
+              print('Notification')
+              // Navigator.push(
+              //     context, MaterialPageRoute(builder: (context) => Home()))
             },
           ),
           ListTile(
