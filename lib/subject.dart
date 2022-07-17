@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:edulane/student.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -57,7 +58,7 @@ class Announcement {
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18),
-        ), // Rounded RectangleBorder
+        ),
         child: InkWell(
           splashColor: Colors.blue.withAlpha(30),
           onTap: () {
@@ -65,12 +66,6 @@ class Announcement {
           },
           child: Container(
             decoration: const BoxDecoration(
-              // image: DecorationImage(
-              //   image: AssetImage("assets/images/teaching.jpg"),
-              //   fit: BoxFit.fitWidth,
-              //   alignment: Alignment.topCenter,
-              // ),
-
               color: Color.fromARGB(255, 200, 230, 255),
             ),
             child: SizedBox(
@@ -255,7 +250,16 @@ class _SubjectState extends State<Subject> {
         debugShowCheckedModeBanner: false,
         title: 'Material App',
         home: Scaffold(
-          drawer: NavDrawer(),
+          drawer: FutureBuilder<bool>(
+              future: getIsStudent(),
+              builder: (context, AsyncSnapshot<bool> snapshot) {
+                if (snapshot.hasData) {
+                  if (snapshot.data == true) return StudentNavDrawer();
+                  return NavDrawer();
+                } else {
+                  return CircularProgressIndicator();
+                }
+              }),
           appBar: AppBar(
             title: Text(c.subject),
             backgroundColor: Colors.blue,

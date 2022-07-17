@@ -25,7 +25,7 @@ class _BottomNavBarState extends State<Home> {
   void initState() {
     _pageOptions = [
       Subject(c: c),
-      People(),
+      People(c: c),
       Profile(),
     ];
   }
