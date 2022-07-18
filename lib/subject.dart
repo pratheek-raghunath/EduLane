@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:edulane/student.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:edulane/navbar.dart';
 import 'package:open_file/open_file.dart';
@@ -66,7 +65,12 @@ class Announcement {
           },
           child: Container(
             decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 200, 230, 255),
+              image: DecorationImage(
+                image: AssetImage("assets/images/bg3.jpg"),
+                fit: BoxFit.fitWidth,
+                alignment: Alignment.topCenter,
+              ),
+              //color: Color.fromARGB(255, 200, 230, 255),
             ),
             child: SizedBox(
               width: 400,
@@ -164,7 +168,12 @@ class _SubjectState extends State<Subject> {
                         borderRadius: BorderRadius.circular(18)),
                     child: Container(
                       decoration: const BoxDecoration(
-                        color: Color.fromARGB(255, 175, 219, 255),
+                        image: DecorationImage(
+                          image: AssetImage("assets/images/bg3.jpg"),
+                          fit: BoxFit.fitWidth,
+                          alignment: Alignment.topCenter,
+                        ),
+                        // color: Color.fromARGB(255, 175, 219, 255),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(0),
@@ -178,8 +187,7 @@ class _SubjectState extends State<Subject> {
                               title: buildTeacherName(context),
                               subtitle: Text(
                                 c.subject,
-                                style: TextStyle(
-                                    color: Colors.black.withOpacity(0.6)),
+                                style: TextStyle(color: Colors.black),
                               ),
                             ),
                             Padding(
@@ -194,7 +202,7 @@ class _SubjectState extends State<Subject> {
                                   hintText: 'Announcement',
                                 ),
                                 style: TextStyle(
-                                    color: Colors.black.withOpacity(0.6)),
+                                    color: Color.fromARGB(255, 0, 0, 0)),
                               ),
                             ),
                             ButtonBar(
@@ -280,13 +288,12 @@ class _SubjectState extends State<Subject> {
                     },
                     child: Container(
                       decoration: const BoxDecoration(
-                        // image: DecorationImage(
-                        //   image: AssetImage("assets/images/teaching.jpg"),
-                        //   fit: BoxFit.fitWidth,
-                        //   alignment: Alignment.topCenter,
-                        // ),
-
-                        color: Color.fromARGB(255, 200, 230, 255),
+                        image: DecorationImage(
+                          image: AssetImage("assets/images/bg3.jpg"),
+                          fit: BoxFit.fitWidth,
+                          alignment: Alignment.topCenter,
+                        ),
+                        //color: Color.fromARGB(255, 200, 230, 255),
                       ),
                       child: SizedBox(
                         width: 400,

@@ -62,7 +62,12 @@ class Class {
             },
             child: Container(
               decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 200, 230, 255),
+                image: DecorationImage(
+                  image: AssetImage("assets/images/bg3.jpg"),
+                  fit: BoxFit.fitWidth,
+                  alignment: Alignment.topCenter,
+                ),
+                // color: Color.fromARGB(255, 200, 230, 255),
               ),
               child: SizedBox(
                 width: 400,
@@ -76,7 +81,7 @@ class Class {
                         style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 8, 115, 255)),
+                            color: Color.fromARGB(255, 255, 255, 255)),
                       )),
                 ),
               ),

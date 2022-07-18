@@ -30,12 +30,12 @@ class CreateCard extends StatelessWidget {
           },
           child: Container(
             decoration: const BoxDecoration(
-              // image: DecorationImage(
-              //   image: AssetImage("assets/images/teaching.jpg"),
-              //   fit: BoxFit.fitWidth,
-              //   alignment: Alignment.topCenter,
-              // ),
-              color: Color.fromARGB(255, 200, 230, 255),
+              image: DecorationImage(
+                image: AssetImage("assets/images/bg.jpg"),
+                fit: BoxFit.fitWidth,
+                alignment: Alignment.topCenter,
+              ),
+              //color: Color.fromARGB(255, 200, 230, 255),
             ),
             child: SizedBox(
               width: 400,
